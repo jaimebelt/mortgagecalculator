@@ -25,9 +25,15 @@ var MortgageCalculatorApp = function () {
     this.btnCalculate = document.getElementById("calculate");
 
     // add event Listeners.
-    this.amountTextInput.addEventListener('keyup', this.listenOnTextField.bind(this.amountTextInput));
-    this.taxTextInput.addEventListener('keyup', this.listenOnTextField.bind(this.taxTextInput));
-    this.insuranceTextInput.addEventListener('keyup', this.listenOnTextField.bind(this.insuranceTextInput));
+    this.amountTextInput.addEventListener('keyup', function (event) {
+      _this.listenOnTextField(_this.amountTextInput);
+    });
+    this.taxTextInput.addEventListener('keyup', function (event) {
+      _this.listenOnTextField(_this.taxTextInput);
+    });
+    this.insuranceTextInput.addEventListener('keyup', function (event) {
+      _this.listenOnTextField(_this.insuranceTextInput);
+    });
 
     this.yearsRange.addEventListener('input', function (event) {
       _this.listenSlider(_this.yearsRange, 0);
@@ -55,12 +61,12 @@ var MortgageCalculatorApp = function () {
     key: "listenOnTextField",
     value: function listenOnTextField(element) {
       var re = /[^0-9\.]/;
-      var newstr = this.value.replace(re, "");
-      this.value = newstr;
+      var newstr = element.value.replace(re, "");
+      element.value = newstr;
       if (newstr == "") {
-        this.closest(".input-wrapper").classList.add('val-error');
+        element.closest(".input-wrapper").classList.add('val-error');
       } else {
-        this.closest(".input-wrapper").classList.remove('val-error');
+        element.closest(".input-wrapper").classList.remove('val-error');
       }
     }
   }, {
@@ -102,7 +108,7 @@ var MortgageCalculatorApp = function () {
       var interestRate = parseFloat(this.rateValSpan.innerHTML);
 
       var yearsOfMortgage = parseFloat(this.yearsValSpan.innerHTML);
-      if (this.amountTextInput.value != "" && this.annualTax.value != "" && this.annualInsurance.value != "") {
+      if (this.amountTextInput.value != "" && this.taxTextInput.value != "" && this.insuranceTextInput.value != "") {
         var loanAmount = parseFloat(this.amountTextInput.value);
         var annualTax = parseFloat(this.taxTextInput.value);
         var annualInsurance = parseFloat(this.insuranceTextInput.value);
@@ -124,7 +130,9 @@ var MortgageCalculatorApp = function () {
           this.resultBoxDiv.classList.add('visible');
         }
       } else {
-        alert("There are some missing fields");
+        this.listenOnTextField(this.amountTextInput);
+        this.listenOnTextField(this.taxTextInput);
+        this.listenOnTextField(this.insuranceTextInput);
       }
     }
   }, {

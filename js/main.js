@@ -19,9 +19,15 @@ class MortgageCalculatorApp {
 
 
     // add event Listeners.
-    this.amountTextInput.addEventListener('keyup', this.listenOnTextField.bind(this.amountTextInput));
-    this.taxTextInput.addEventListener('keyup', this.listenOnTextField.bind(this.taxTextInput));
-    this.insuranceTextInput.addEventListener('keyup', this.listenOnTextField.bind(this.insuranceTextInput));
+    this.amountTextInput.addEventListener('keyup', (event)=>{
+      this.listenOnTextField(this.amountTextInput);
+    });
+    this.taxTextInput.addEventListener('keyup', (event)=>{
+      this.listenOnTextField(this.taxTextInput);
+    });
+    this.insuranceTextInput.addEventListener('keyup', (event)=>{
+      this.listenOnTextField(this.insuranceTextInput);
+    });
 
     this.yearsRange.addEventListener('input', (event)=>{
       this.listenSlider(this.yearsRange,0);
@@ -38,19 +44,18 @@ class MortgageCalculatorApp {
   /**
    * Replace non numeric characters and adds error class if there is no data on the field
    * @param   {[type]}                 element [description]
-   * @return  {[type]}                         [description]
    * @author Jaime Beltran
    * @version 1.0
    * @date    2019-05-24T10:51:52-0500
    */
   listenOnTextField(element){
     let re = /[^0-9\.]/;
-    let newstr = this.value.replace(re, "");
-    this.value=newstr;
+    let newstr = element.value.replace(re, "");
+    element.value=newstr;
     if(newstr==""){
-      this.closest(".input-wrapper").classList.add('val-error');
+      element.closest(".input-wrapper").classList.add('val-error');
     }else{
-      this.closest(".input-wrapper").classList.remove('val-error');
+      element.closest(".input-wrapper").classList.remove('val-error');
     }
   }
 
@@ -88,7 +93,7 @@ class MortgageCalculatorApp {
     let interestRate=parseFloat(this.rateValSpan.innerHTML);
 
     let yearsOfMortgage=parseFloat(this.yearsValSpan.innerHTML);
-    if(this.amountTextInput.value!="" && this.annualTax.value!="" && this.annualInsurance.value!=""){
+    if(this.amountTextInput.value!="" && this.taxTextInput.value!="" && this.insuranceTextInput.value!=""){
       let loanAmount=parseFloat(this.amountTextInput.value);
       let annualTax=parseFloat(this.taxTextInput.value);
       let annualInsurance=parseFloat(this.insuranceTextInput.value);
@@ -110,7 +115,9 @@ class MortgageCalculatorApp {
         this.resultBoxDiv.classList.add('visible');
       }
     }else {
-      alert("There are some missing fields");
+      this.listenOnTextField(this.amountTextInput);
+      this.listenOnTextField(this.taxTextInput);
+      this.listenOnTextField(this.insuranceTextInput);
     }
   }
 
