@@ -1,24 +1,7 @@
 /**
- * Copyright 2015 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 
  */
 'use strict';
-
-/*import {$,jQuery} from 'jquery-3.4.1.min.js';
-// export for others scripts to use
-window.$ = $;
-window.jQuery = jQuery;*/
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -56,8 +39,6 @@ var MortgageCalculatorApp = function () {
     this.btnCalculate.addEventListener('click', function () {
       _this.calculate(_this.btnCalculate);
     });
-
-    console.log(this.rateValSpan);
   }
 
   _createClass(MortgageCalculatorApp, [{
@@ -108,29 +89,32 @@ var MortgageCalculatorApp = function () {
   }, {
     key: "calculate",
     value: function calculate(element) {
-      console.log(this.rateValSpan);
       var interestRate = parseFloat(this.rateValSpan.innerHTML);
 
       var yearsOfMortgage = parseFloat(this.yearsValSpan.innerHTML);
-      var loanAmount = parseFloat(this.amountTextInput.value);
-      var annualTax = parseFloat(this.taxTextInput.value);
-      var annualInsurance = parseFloat(this.insuranceTextInput.value);
+      if (this.amountTextInput.value != "" && this.annualTax.value != "" && this.annualInsurance.value != "") {
+        var loanAmount = parseFloat(this.amountTextInput.value);
+        var annualTax = parseFloat(this.taxTextInput.value);
+        var annualInsurance = parseFloat(this.insuranceTextInput.value);
 
-      var principle = interestRate / 100 / 12 * loanAmount / (1 - Math.pow(1 + interestRate / 100 / 12, -yearsOfMortgage * 12));
-      var tax = annualTax / 12;
-      var insurance = annualInsurance / 12;
-      var monthlyPayment = principle + tax + insurance;
+        var principle = interestRate / 100 / 12 * loanAmount / (1 - Math.pow(1 + interestRate / 100 / 12, -yearsOfMortgage * 12));
+        var tax = annualTax / 12;
+        var insurance = annualInsurance / 12;
+        var monthlyPayment = principle + tax + insurance;
 
-      this.updateResultValue('principleResult', this.formatNumber(principle, 2, true, "$ "));
-      this.updateResultValue('taxResult', this.formatNumber(tax, 2, true, "$ "));
-      this.updateResultValue('insuranceResult', this.formatNumber(insurance, 2, true, "$ "));
-      this.updateResultValue('totalResult', this.formatNumber(monthlyPayment, 2, true, "$ "));
+        this.updateResultValue('principleResult', this.formatNumber(principle, 2, true, "$ "));
+        this.updateResultValue('taxResult', this.formatNumber(tax, 2, true, "$ "));
+        this.updateResultValue('insuranceResult', this.formatNumber(insurance, 2, true, "$ "));
+        this.updateResultValue('totalResult', this.formatNumber(monthlyPayment, 2, true, "$ "));
 
-      element.innerHTML = "RECALCULATE";
+        element.innerHTML = "RECALCULATE";
 
-      if (!this.resultBoxDiv.classList.contains('visible') && this.isMobile()) {
-        this.animateScroll(180, 300);
-        this.resultBoxDiv.classList.add('visible');
+        if (!this.resultBoxDiv.classList.contains('visible') && this.isMobile()) {
+          this.animateScroll(180, 300);
+          this.resultBoxDiv.classList.add('visible');
+        }
+      } else {
+        alert("There are some missing fields");
       }
     }
   }, {
