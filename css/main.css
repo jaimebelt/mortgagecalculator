@@ -172,8 +172,31 @@ input[type=text]:focus {
   color: #da3535;
   margin-top: 1px;
 }
+.input-wrapper .error-msg-mob {
+  display: none;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+  text-align: left;
+  color: #da3535;
+  margin-top: 1px;
+}
 .input-wrapper.val-error .error-msg {
+  display: none;
+}
+@media (min-width: 767px) {
+  .input-wrapper.val-error .error-msg {
+    display: block;
+  }
+}
+.input-wrapper.val-error .error-msg-mob {
   display: block;
+}
+@media (min-width: 767px) {
+  .input-wrapper.val-error .error-msg-mob {
+    display: none;
+  }
 }
 
 .slider {

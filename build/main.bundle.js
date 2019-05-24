@@ -41,6 +41,16 @@ var MortgageCalculatorApp = function () {
     });
   }
 
+  /**
+   * Replace non numeric characters and adds error class if there is no data on the field
+   * @param   {[type]}                 element [description]
+   * @return  {[type]}                         [description]
+   * @author Jaime Beltran
+   * @version 1.0
+   * @date    2019-05-24T10:51:52-0500
+   */
+
+
   _createClass(MortgageCalculatorApp, [{
     key: "listenOnTextField",
     value: function listenOnTextField(element) {

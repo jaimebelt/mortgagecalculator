@@ -2,7 +2,9 @@
 
 This app calculates monthly payment based on given data. 
 
-![alt text](https://github.com/jaimebelt/reviewtextcode.git/master/image.png)
+![alt text](https://raw.githubusercontent.com/jaimebelt/reviewtextcode.git/master/image.png)
+
+![alt text](image.png?raw=true "sample image")
 
 ## Formulas are:
 

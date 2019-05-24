@@ -35,6 +35,14 @@ class MortgageCalculatorApp {
     });
   }
 
+  /**
+   * Replace non numeric characters and adds error class if there is no data on the field
+   * @param   {[type]}                 element [description]
+   * @return  {[type]}                         [description]
+   * @author Jaime Beltran
+   * @version 1.0
+   * @date    2019-05-24T10:51:52-0500
+   */
   listenOnTextField(element){
     let re = /[^0-9\.]/;
     let newstr = this.value.replace(re, "");
