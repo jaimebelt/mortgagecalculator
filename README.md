@@ -6,14 +6,14 @@ This app calculates mortgage monthly payment based on given data.
 
 ## Prerequisites
 
-- To open the app is not necessary any external library o compiler. Just open "index.html"
+- To open the app is not necessary any external library o compiler.
 - npm (to install and run Babel)
 - Sass (to make changes to scss source)
 - Babel (to keep compatibility with ES5 if "js/main.js" is modify)
 
 ## Usage:
 
-Just open "index.html"
+Just open "index.html" in your browser
 
 ### To change styles or js:
 
