@@ -8,14 +8,14 @@ This app calculates mortgage monthly payment based on given data.
 
 - To open the app is not necessary any external library o compiler. Just open "index.html"
 - npm (to install and run Babel)
-- Sass (to make changes to css source)
-- Babel (to keep compatibility with ES5 if main.js is modified)
+- Sass (to make changes to scss source)
+- Babel (to keep compatibility with ES5 if "js/main.js" is modify)
 
 ## Usage:
 
 Just open "index.html"
 
-###To change styles or js:
+### To change styles or js:
 
 Compile scss by the following command
 ```
@@ -26,16 +26,16 @@ Compile ES6 js by the following command
 npm run babel
 ```
 
-## Formulas are:
+## Formulas
 
 ### Principle & Interest:
 *((interestRate / 100) / 12) \* loanAmount / (1-Math.pow((1 + ((interestRate / 100)/12)),-yearsOfMortgage\*12))*
 
-### Tax
+### Tax:
 *annualTax / 12*
 
-### Insurance
+### Insurance:
 *annualInsurance / 12*
 
-### Monthly payment
+### Monthly payment:
 *principleAndInterests + Tax + Insurance*
