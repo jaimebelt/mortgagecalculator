@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <script src="build/main.bundle.js"></script>
+	<title>Mortgage Calculator</title>
+</head>
+<body>
+<div class="main-container">
+  <div class="screen-title-wrapper">
+    <h1>Mortgage Calculator</h1>
+  </div>
+  <div class="content-wrapper">
+    <div id="cb" class="calculator-box">
+      <h5>Change values to calculate your results</h5>
+      <div class="input-wrapper mb8 mb15-md">
+        <label>Years of mortgage</label>
+        <div class="range-selector">
+          <span class="min-val">1</span>
+          <div class="slider">
+            <input type="range" name="years" id="years" min="0" max="100" value="75" true-range="1,40">
+          </div>
+          <span class="max-val">40</span>
+          <span id="yearsVal" class="view-value">30</span>
+        </div>
+      </div>
+      <div class="input-wrapper mb17 mb15-md">
+        <label>Rate of interest (%)</label>
+        <div class="range-selector">
+          <span class="min-val">0.1</span>
+          <div class="slider">
+            <input type="range" name="rate" id="rate" min="0" max="100" value="80" true-range="0.1,10">
+          </div>
+          <span class="max-val">10</span>
+          <span id="rateVal" class="view-value">8.0</span>
+        </div>
+      </div>
+      <div class="input-wrapper mb15">
+        <label class="mb5">Loan Amount</label>
+        <div class="add-price-symbol">
+          <input class="price" type="text" name="amount" id="amount" value="100000" pattern="\d*">
+        </div>
+        <div class="error-msg">Mandatory field</div>
+      </div>
+      <div class="columns mb15">
+        <div class="col pr10">
+          <div class="input-wrapper">
+            <label class="mb5">Annual Tax</label>
+            <div class="add-price-symbol">
+              <input type="text" name="tax" id="tax" value="1000">
+            </div>
+            <div class="error-msg">Mandatory field</div>
+          </div>
+        </div>
+        <div class="col pl10">
+          <div class="input-wrapper">
+            <label class="mb5">Annual Insurance</label>
+            <div class="add-price-symbol">
+              <input type="text" name="insurance" id="insurance" value="300">
+            </div>
+            <div class="error-msg">Mandatory field</div>
+          </div>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <button class="btn-blue" id="calculate">CALCULATE</button>
+      </div>
+    </div>
+    <div id="result-box" class="result-box">
+      <h5>Your results</h5>
+      <div class="result-item">
+        <label>Principle & Interest</label>
+        <span id="principleResult">$ --</span>
+      </div>
+      <div class="result-item">
+        <label>Tax</label>
+        <span id="taxResult">$ --</span>
+      </div>
+      <div class="result-item">
+        <label>Insurance</label>
+        <span id="insuranceResult">$ --</span>
+      </div>
+      <hr class="result-line">
+      <div class="result-item last">
+        <label class="total">Total Monthly Payment</label>
+        <span class="total" id="totalResult">$ --</span>
+      </div>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
+
+  
