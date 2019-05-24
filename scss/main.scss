@@ -1,3 +1,4 @@
+/** variables, settings and functions*/
 @font-face {
     font-family: 'SFUIDisplay';
     src: url("../fonts/SF-UI-Display-Regular.otf") format('opentype');
@@ -13,6 +14,9 @@ $media767:"(min-width: 767px)";
 $calculatorBoxWidthDesktopProportion:470;
 $resultsBoxWidthDesktopProportion:298-(40-14);
 
+$mobileFontSize:12px;
+$desktopFontSize:14px;
+
 
 @mixin media($queryString){
   @media #{$queryString} {
@@ -20,8 +24,15 @@ $resultsBoxWidthDesktopProportion:298-(40-14);
   }
 }
 
+// Function for getting column width in percentage
 @function getColumnWidth($width, $totalWidth){
   @return 100*($width / $totalWidth) * 1%;
+}
+
+// Function for converting a px based font-size to rem.
+@function calculateRem($size,$base) {
+  $remSize: $size / $base;
+  @return #{$remSize}rem;
 }
 
 html {
@@ -46,6 +57,8 @@ body {
     margin: 0;
 }
 
+
+/** globals **/
 .main-container {
   padding:13px 0 0 0px;
   min-height: 1000px;
@@ -54,72 +67,52 @@ body {
   }
 }
 
-.screen-title-wrapper {
-  padding: 0 0 0 20px;
-  @include media($media767){
-    padding:0;
-  }
-  h1 {
-    padding: 10px 0;
-    margin:0;
-    height: 24px;
-    border-bottom: solid 2px #cacaca;
-    width:100%;
-    font-size: 20px;
-    font-weight: 300;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.2;
-    letter-spacing: 0.5px;
-    text-align: left;
-    color:$titleColor;
-    @include media($media767){
-      padding:10px 0px 15px 0px;
-      font-size:22px;
-      line-height: 1.36;
-    }
-  }
+.mb5 {
+  margin-bottom:5px!important;
 }
 
-.content-wrapper {
-  margin: 0;
-  padding:10px 0 0 0;
-  @include media($media767){
-    padding:25px 38px 77px 40px;
-    display:flex;
-    align-items:center;
-  }
+.mb8 {
+  margin-bottom:8px!important;
 }
 
-.calculator-box {
-  margin: 0px 10px;
-  padding: 10px 20px 20px 20px;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.1);
-  background:$backgroundColor;
-  @include media($media767){
-    margin: 0;
-    width:getColumnWidth($calculatorBoxWidthDesktopProportion,($calculatorBoxWidthDesktopProportion+$resultsBoxWidthDesktopProportion));
-    padding: 29px 40px 40px 40px;
+.mb17 {
+  margin-bottom:17px!important;
+}
+
+.mb15 {
+  margin-bottom:15px!important;
+}
+
+.pr10 {
+  padding-right: 10px!important;
+}
+
+.pl10 {
+  padding-left: 10px!important;
+}
+
+@include media($media767){
+  .mb5-md {
+    margin-bottom:5px!important;
   }
-  h5 {
-    font-size: 1rem;
-    height: 20px;
-    padding: 5px 0;
-    margin:0 0 10px 0;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    width:100%;
-    text-align:left;
-    border-bottom: solid 2px #cacaca;
-    @include media($media767){
-      padding: 5px 0 10.5px 0;
-      margin:0 0 30.5px 0;
-      font-size: 16px;
-      height: 24px;
-      line-height: 1.5;
-    }
+  .mb8-md {
+    margin-bottom:8px!important;
+  }
+
+  .mb17-md {
+    margin-bottom:17px!important;
+  }
+
+  .mb15-md {
+    margin-bottom:15px!important;
+  }
+
+  .pr10-md {
+    padding-right: 10px!important;
+  }
+
+  .pl10-md {
+    padding-left: 10px!important;
   }
 }
 
@@ -133,14 +126,14 @@ input[type="text"] {
   padding: 0 15px;
   margin:0;
   color:$primaryColor;
-  font-size: 14px;
+  font-size: calculateRem(14px,$mobileFontSize);
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;         /* Opera/IE 8+ */
 
   @include media($media767){
     height: 45px;
-    font-size: 16px;
+    font-size: calculateRem(16px,$desktopFontSize);
     line-height:45px;
     letter-spacing:0.32px;
     padding: 0 25px;
@@ -153,59 +146,108 @@ input[type="text"] {
   }
 }
 
-.input-wrapper {
-  position:relative;
+.columns {
+  display:flex;
+  .col {
+    flex:1
+  }
+}
+
+.btn-blue {
+  background:$buttonColor;
+  border-radius:4px;
   width:100%;
+  height:40px;
+  color:#ffffff;
+  font-size:14px;
+  font-weight:bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-align: center;
+  border: none;
+  outline:none;
+  cursor:pointer;
+}
+
+.content-wrapper {
   margin: 0;
-  padding: 5px 0 0 0;
-  line-height:normal;
-  label {
-    font-weight: bold;
-    display:inline-block;
+  padding:20px 0 0 0;
+  @include media($media767){
+    padding:25px 38px 77px 40px;
+    display:flex;
+    align-items:center;
   }
+}
 
-  &.val-error {
-    input[type="text"]{
-      border: solid 1px $errorColor;
+.add-price-symbol {
+  position:relative;
+  input[type="text"] {
+    padding: 0 15px 0 28px;
+    @include media($media767){
+      padding: 0 25px 0 38px;
     }
   }
 
-  .error-msg {
-    display:none;
-    font-size: 10px;
-    line-height:12px;
-    font-weight: bold;
-    letter-spacing: 0.2px;
-    text-align: left;
-    color: $errorColor;
-    margin-top: 1px;
-  }
+  &::after {
+    content:"$";
+    font-size: calculateRem(14px,$mobileFontSize);
+    line-height:40px;
+    position:absolute;
+    left:15px;
+    top:0;
+    color: $primaryColor;
+    z-index: 100;
 
-  .error-msg-mob {
-    display:none;
-    font-size: 10px;
-    line-height:12px;
-    font-weight: bold;
-    letter-spacing: 0.2px;
-    text-align: left;
-    color: $errorColor;
-    margin-top: 1px;
-  }
-
-  &.val-error {
-    .error-msg {
-      display:none;
-      @include media($media767){
-        display:block;
-      }
-    }
-    .error-msg-mob {
-      display:block;
-      @include media($media767){
-        display:none;
-      }
+    @include media($media767){
+      height: 45px;
+      left: 25px;
+      font-size: calculateRem(16px,$desktopFontSize);
+      line-height:45px;
+      letter-spacing:0.32px;
     }
   }
+}
+
+.range-selector{
+  display: flex;
+  align-items: center;
+
+  .min-val{
+    font-size: calculateRem(14px,$mobileFontSize);
+    line-height: normal;
+    letter-spacing: 0.3px;
+    min-width: 25px;
+    margin:0;
+    height:16px;
+    @include media($media767){
+      font-size: calculateRem(16px,$desktopFontSize);
+      min-width: 30px;
+    }
+  }
+  .max-val{
+    @extend .min-val;
+  }
+  .view-value{
+    font-size: calculateRem(14px,$mobileFontSize);
+    line-height: 40px;
+    border-radius: 4px;
+    text-align: center;
+    width: 50px;
+    min-width: 50px;
+    height: 40px;
+    vertical-align: middle;
+    border: solid 1px #a6a6a6;
+    color: #0d0d0d;
+    @include media($media767){
+      width: 60px;
+      min-width: 60px;
+      height: 45px;
+      font-size: calculateRem(16px,$desktopFontSize);
+      line-height: 45px;
+    }
+  } 
 }
 
 .slider{
@@ -272,101 +314,125 @@ input[type="text"] {
 }
 
 
-
-.add-price-symbol {
-  position:relative;
-  input[type="text"] {
-    padding: 0 15px 0 28px;
-    @include media($media767){
-      padding: 0 25px 0 38px;
-    }
+/** section title **/
+.screen-title-wrapper {
+  padding: 0 0 0 20px;
+  @include media($media767){
+    padding:0;
   }
-
-  &::after {
-    content:"$";
-    font-size: 14px;
-    line-height:40px;
-    position:absolute;
-    left:15px;
-    top:0;
-    color: $primaryColor;
-    z-index: 100;
-
-    @include media($media767){
-      height: 45px;
-      left: 25px;
-      font-size: 16px;
-      line-height:45px;
-      letter-spacing:0.32px;
-    }
-  }
-}
-
-.range-selector{
-  display: flex;
-  align-items: center;
-
-  .min-val{
-    font-size: 14px;
-    line-height: normal;
-    letter-spacing: 0.3px;
-    min-width: 25px;
+  h1 {
+    padding: 10px 0;
     margin:0;
-    height:16px;
+    height: 24px;
+    border-bottom: solid 2px #cacaca;
+    width:100%;
+    font-size: calculateRem(20px,$mobileFontSize);
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color:$titleColor;
     @include media($media767){
-      font-size: 16px;
-      min-width: 30px;
+      padding:10px 0px 15px 0px;
+      font-size:22px;
+      line-height: 1.36;
     }
-  }
-  .max-val{
-    @extend .min-val;
-  }
-  .view-value{
-    font-size: 14px;
-    line-height: 40px;
-    border-radius: 4px;
-    text-align: center;
-    width: 50px;
-    min-width: 50px;
-    height: 40px;
-    vertical-align: middle;
-    border: solid 1px #a6a6a6;
-    color: #0d0d0d;
-    @include media($media767){
-      width: 60px;
-      min-width: 60px;
-      height: 45px;
-      font-size: 16px;
-      line-height: 45px;
-    }
-  } 
-}
-
-.columns {
-  display:flex;
-  .col {
-    flex:1
   }
 }
 
-.btn-blue {
-  background:$buttonColor;
-  border-radius:4px;
+
+/** section calculator inputs */
+.calculator-box {
+  margin: 0px 10px;
+  padding: 10px 20px 20px 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.1);
+  background:$backgroundColor;
+  @include media($media767){
+    margin: 0;
+    width:getColumnWidth($calculatorBoxWidthDesktopProportion,($calculatorBoxWidthDesktopProportion+$resultsBoxWidthDesktopProportion));
+    padding: 29px 40px 40px 40px;
+  }
+  h5 {
+    font-size: 1rem;
+    height: 20px;
+    padding: 5px 0;
+    margin:0 0 10px 0;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    width:100%;
+    text-align:left;
+    border-bottom: solid 2px #cacaca;
+    @include media($media767){
+      padding: 5px 0 10.5px 0;
+      margin:0 0 30.5px 0;
+      font-size: calculateRem(16px,$desktopFontSize);
+      height: 24px;
+      line-height: 1.5;
+    }
+  }
+}
+
+.input-wrapper {
+  position:relative;
   width:100%;
-  height:40px;
-  color:#ffffff;
-  font-size:14px;
-  font-weight:bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.6px;
-  text-align: center;
-  border: none;
-  outline:none;
-  cursor:pointer;
+  margin: 0;
+  padding: 5px 0 0 0;
+  line-height:normal;
+  label {
+    font-weight: bold;
+    display:inline-block;
+  }
+
+  &.val-error {
+    input[type="text"]{
+      border: solid 1px $errorColor;
+    }
+  }
+
+  .error-msg {
+    display:none;
+    font-size: calculateRem(10px,$mobileFontSize);
+    line-height:12px;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    text-align: left;
+    color: $errorColor;
+    margin-top: 1px;
+  }
+
+  .error-msg-mob {
+    display:none;
+    font-size: calculateRem(10px,$mobileFontSize);
+    line-height:12px;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    text-align: left;
+    color: $errorColor;
+    margin-top: 1px;
+  }
+
+  &.val-error {
+    .error-msg {
+      display:none;
+      @include media($media767){
+        display:block;
+      }
+    }
+    .error-msg-mob {
+      display:block;
+      @include media($media767){
+        display:none;
+      }
+    }
+  }
 }
 
+
+/** section results **/
 .result-box {
   margin: -20px 10px 10px 10px;
   background:$backgroundColor2;
@@ -390,11 +456,11 @@ input[type="text"] {
   h5 {
     margin:0 0 12px 0;
     height: 30px;
-    font-size: 20px; 
+    font-size: calculateRem(20px,$mobileFontSize); 
     letter-spacing: normal;
     font-weight:normal;
     @include media($media767){
-      font-size: 22px;
+      font-size: calculateRem(22px,$desktopFontSize);
       line-height: 30px; 
       margin-bottom:19px;
     }
@@ -434,7 +500,7 @@ input[type="text"] {
 
     label.total {
       @include media($media767){
-        font-size: 18px;
+        font-size: calculateRem(18px,$desktopFontSize);
         line-height: 30px;
       }
     }
@@ -445,10 +511,12 @@ input[type="text"] {
       line-height: 16px;
       font-weight:bold;
       float:right;
-      width:35%;
+      max-width: 60%;
+      white-space: nowrap;
       @include media($media767){
         text-align:left;
         width:100%;
+        max-width: 100%;
         font-size:18px;
         line-height: 30px;
         color:$primaryColor;
@@ -457,10 +525,10 @@ input[type="text"] {
       }
       &.total{
         line-height: 21px;
-        font-size: 18px;
+        font-size: calculateRem(18px,$mobileFontSize);
         @include media($media767){
           line-height: 30px;
-          font-size: 22px;
+          font-size: calculateRem(22px,$desktopFontSize);
         }
       }
       &.non-empty-value,.total.non-empty-value{
@@ -482,55 +550,5 @@ input[type="text"] {
     @include media($media767){
       display:block;
     }
-  }
-}
-
-
-.mb5 {
-  margin-bottom:5px;
-}
-
-.mb8 {
-  margin-bottom:8px;
-}
-
-.mb17 {
-  margin-bottom:17px;
-}
-
-.mb15 {
-  margin-bottom:15px;
-}
-
-.pr10 {
-  padding-right: 10px;
-}
-
-.pl10 {
-  padding-left: 10px;
-}
-
-@include media($media767){
-  .mb5-md {
-    margin-bottom:8px;
-  }
-  .mb8-md {
-    margin-bottom:8px!important;
-  }
-
-  .mb17-md {
-    margin-bottom:17px!important;
-  }
-
-  .mb15-md {
-    margin-bottom:15px!important;
-  }
-
-  .pr10-md {
-    padding-right: 10px!important;
-  }
-
-  .pl10-md {
-    padding-left: 10px!important;
   }
 }
