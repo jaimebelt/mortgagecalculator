@@ -172,7 +172,7 @@ var MortgageCalculatorApp = function () {
         element.innerHTML = "RECALCULATE";
 
         if (!this.resultBoxDiv.classList.contains('visible') && this.isMobile()) {
-          this.animateScroll(180, 300);
+          this.animateScroll(365, 300);
           this.resultBoxDiv.classList.add('visible');
         }
       } else {

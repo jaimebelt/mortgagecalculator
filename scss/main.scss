@@ -61,7 +61,7 @@ body {
 /** globals **/
 .main-container {
   padding:13px 0 0 0px;
-  min-height: 1000px;
+  min-height: 520px;
   @include media($media767){
     padding:0px 50px 20px 30px;
   }
@@ -434,24 +434,28 @@ input[type="text"] {
 
 /** section results **/
 .result-box {
+  display:none;
   margin: -20px 10px 10px 10px;
   background:$backgroundColor2;
   padding:40px 20px 20px 20px;
   z-index:-1;
   position: relative;
-  transform: scale3d(1,0,1) translateY(-50%);
-  transition: transform linear 0.3s;
-  -webkit-transition: transform linear 0.3s; /* Safari */
+  transform: scaleY(0);
+  transition: transform ease-in 0.4s;
+  -webkit-transition: transform ease-in 0.4s; /* Safari */
+  transform-origin:  top;
 
   @include media($media767){
     margin: 0;
     width:getColumnWidth($resultsBoxWidthDesktopProportion,($calculatorBoxWidthDesktopProportion+$resultsBoxWidthDesktopProportion));
     padding:36px 40px 30px 40px;
     transform:none;
+    display:block;
   }
 
   &.visible {
-    transform: scale3d(1,1,1) translateY(0%);
+    transform: scaleY(1);
+    display:block;
   }
   h5 {
     margin:0 0 12px 0;
